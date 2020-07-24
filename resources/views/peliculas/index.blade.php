@@ -27,7 +27,7 @@
                           <tr>
                               <td>{{ $pelicula->id }}</td>
                               <td>{{ $pelicula->nombre }}</td>
-                              <td>{{ $pelicula->categoria_id }}</td>
+                              <td>{{ $pelicula->categoria->nombre }}</td>
                               <td>
 
                                 <form action="{{ route('peliculas.destroy', $pelicula->id)}}" method="post">

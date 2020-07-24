@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\PeliculaFormRequest;
 use App\Pelicula;
 use App\Categoria;
 use Illuminate\Http\Request;
@@ -40,7 +41,7 @@ class PeliculaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PeliculaFormRequest $request)
     {
       $pelicula = new Pelicula();
       $pelicula->nombre = request('nombre');
