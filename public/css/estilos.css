@@ -1,0 +1,27 @@
+  @media screen and (max-width:1200px){
+    body{
+      background-color: #ff0000;
+    }
+    .imagen{
+      background-image: url('../img/pc.jpg');
+      height: 500px;
+    }
+  }
+  @media screen and (max-width:768px){
+    body{
+      background-color: #00ff00;
+    }
+    .imagen{
+      background-image: url('../img/tablet.jpg');
+      height: 500px;
+    }
+  }
+  @media screen and (max-width:480px){
+    body{
+      background-color: #0000ff;
+    }
+    .imagen{
+      background-image: url('../img/celular.jpg');
+      height: 500px;
+    }
+  }
