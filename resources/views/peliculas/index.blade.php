@@ -30,13 +30,10 @@
                               <td>{{ $pelicula->categoria->nombre }}</td>
                               <td>
 
-                                <form action="{{ route('peliculas.destroy', $pelicula->id)}}" method="post">
-                                  @csrf
-                                  @method('DELETE')
+
                                   <a href="{{ route('peliculas.show', $pelicula->id)}}"><button type="button" class="btn btn-success">Ver</button></a>
                                   <a href="{{ route('peliculas.edit', $pelicula->id)}}"><button type="button" class="btn btn-info">Editar</button></a>
-                                  <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
+
                               </td>
                           </tr>
                           @endforeach

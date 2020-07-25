@@ -43,9 +43,16 @@ class PeliculaController extends Controller
      */
     public function store(PeliculaFormRequest $request)
     {
+      $fileNameWithTheExtension = request('imagen')->getClientOriginalName();
+      $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
+      $extension = request('imagen')->getClientOriginalExtension();
+      $newFileName = $fileName . '_' . time() . '.' . $extension;
+      $path = request('imagen')->storeAs('public/movies', $newFileName);
+
       $pelicula = new Pelicula();
       $pelicula->nombre = request('nombre');
       $pelicula->categoria_id = request('categoria_id');
+      $pelicula->imagen = $newFileName;
       $pelicula->save();
       return redirect('/peliculas');
     }
@@ -58,7 +65,7 @@ class PeliculaController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('peliculas.show',['pelicula'=> Pelicula::findOrFail($id)]);
     }
 
     /**
@@ -69,7 +76,8 @@ class PeliculaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categorias = Categoria::all();
+        return view('peliculas.edit',['pelicula'=> Pelicula::findOrFail($id)], compact('categorias'));
     }
 
     /**
@@ -79,9 +87,23 @@ class PeliculaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PeliculaFormRequest $request, $id)
     {
-        //
+      $pelicula = Pelicula::findOrFail($id);
+      if(!empty(request('imagen'))){
+        $fileNameWithTheExtension = request('imagen')->getClientOriginalName();
+        $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
+        $extension = request('imagen')->getClientOriginalExtension();
+        $newFileName = $fileName . '_' . time() . '.' . $extension;
+        $path = request('imagen')->storeAs('public/movies', $newFileName);
+        $pelicula->imagen = $newFileName;
+      }
+
+
+      $pelicula->nombre = request('nombre');
+      $pelicula->categoria_id = request('categoria_id');
+      $pelicula->update();
+      return redirect('/peliculas');
     }
 
     /**
